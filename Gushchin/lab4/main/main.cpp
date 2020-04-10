@@ -28,6 +28,9 @@ int main()
 
 	try
 	{
+		// Examples: 5*x^5*y^1*z^4+7*x^4*y^2*z^1+12*x^3-7*z^2-3
+		// 10*x^5*y^1*z^4+7*x^4*y^2*z^1+12*x^3+7*z^2+7-13*x^7*y^1*z^3
+
 		cout << "Enter the polinom number 1: " << endl;
 		cin >> tmp;
 		Polinom polinom1(tmp, v, base);
@@ -88,53 +91,5 @@ int main()
 	{
 		cout << err;
 	}
-
-	//vector<string> var;
-	//var.push_back("x");
-	//var.push_back("y");
-	//var.push_back("z");
-	//Polinom p(var, 10);
-	//p.sortedAdd(-5, 723);
-	//p.sortedAdd(100, 234);
-	//p.sortedAdd(100, 722);
-	//
-	//cout << p << endl;
-	//
-	//vector<string> vars;
-	//vars.push_back("x");
-	//vars.push_back("y");
-	//vars.push_back("z");
-
-	//Polinom pol1("5*x^5*y^1*z^4+7*x^4*y^2*z^1+12*x^3-7*z^2-3", vars, 10);
-	//cout << pol1 << endl;
-	//
-	//Polinom pol2("10*x^5*y^1*z^4+7*x^4*y^2*z^1+12*x^3+7*z^2+7-13*x^7*y^1*z^3", vars, 10);
-	//cout << pol2 << endl;
-
-	//cout << pol1 + pol2 << endl;
-	//cout << pol1 - pol2 << endl;
-	//cout << pol2 - pol1 << endl;
-	//cout << pol1 * pol2 << endl;
-
-	//Polinom pol3("x^3*y*z + 5", vars, 10);
-	//Polinom pol4("-3*x^2*y*z+4", vars, 10);
-
-	////auto q = pol3.Parse("5*x*y - 3*z");
-
-	//cout << pol3 << endl;
-
-	//cout << pol3 * pol4 << endl;
-
-	/*vector<int> powers;
-	powers.push_back(5);
-	powers.push_back(1);
-	powers.push_back(4);
-
-	cout << pol1.toDecimalSystem(powers) << endl;
-	
-	vector<int> powers2;
-
-	powers2 = pol2.toBaseSystem(415);*/
-
 	return 0;
 }

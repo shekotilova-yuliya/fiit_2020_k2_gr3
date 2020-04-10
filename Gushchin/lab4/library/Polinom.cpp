@@ -533,8 +533,6 @@ bool Polinom::operator==(const Polinom& r) const
 
 	while (t1 != head && t2 != r.head)
 	{
-		/*res.sortedAdd(t2->coef * factor, t2->pow);*/
-
 		if ((t1->coef != t2->coef) || (t1->pow != t2->pow)) return 0;
 
 		t1 = t1->next;
