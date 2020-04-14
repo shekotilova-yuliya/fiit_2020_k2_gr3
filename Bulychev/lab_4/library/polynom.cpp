@@ -287,6 +287,68 @@ ostream & operator<<(ostream & out, const Monom & m)
 	return out;
 }
 
+Polynom Polynom::operator+(Polynom& p2)
+{
+	Polynom res;
+	Polynom copy1(*this), copy2(p2);
+	Node <Monom>* t1, * t2, * t3;
+	t1 = res.monoms.getheadptr();
+	t2 = copy1.monoms.getheadptr();
+	t3 = copy2.monoms.getheadptr();
+
+	while (t2 && t3)
+	{
+		if (t2->data.getPower() == t3->data.getPower())
+		{
+			if (t2->data.getCoef() + t3->data.getCoef())
+			{
+				Monom p = Monom(t2->data.getCoef() + t3->data.getCoef(), t2->data.getPower());
+				res.monoms.pushBack(p);
+				res.resize();
+				res.normalize();
+			}
+			t2 = t2->next;
+			t3 = t3->next;
+		}
+		else if (t2->data.getPower() < t3->data.getPower())
+		{
+			Monom p = Monom(t2->data.getCoef(), t2->data.getPower());
+			res.monoms.pushBack(p);
+			res.resize();
+			res.normalize();
+			t2 = t2->next;
+		}
+		else
+		{
+			Monom p = Monom(t3->data.getCoef(), t3->data.getPower());
+			res.monoms.pushBack(p);
+			res.resize();
+			res.normalize();
+			t3 = t3->next;
+		}
+	}
+
+	while (t2)
+	{
+		Monom p = Monom(t2->data.getCoef(), t2->data.getPower());
+		res.monoms.pushBack(p);
+		res.resize();
+		res.normalize();
+		t2 = t2->next;
+	}
+
+	while (t3)
+	{
+		Monom p = Monom(t3->data.getCoef(), t3->data.getPower());
+		res.monoms.pushBack(p);
+		res.resize();
+		res.normalize();
+		t3 = t3->next;
+	}
+	return res;
+}
+
+/*
 Polynom operator+(const Polynom & p1, const Polynom & p2)
 {
 	Polynom temp1(p1);
@@ -300,7 +362,70 @@ Polynom operator+(const Polynom & p1, const Polynom & p2)
 	}
 	return temp1;
 }
+*/
 
+Polynom Polynom::operator-(Polynom& p2)
+{
+	Polynom res;
+	Polynom copy1(*this), copy2(p2);
+	Node <Monom>* t1, * t2, * t3;
+	t1 = res.monoms.getheadptr();
+	t2 = copy1.monoms.getheadptr();
+	t3 = copy2.monoms.getheadptr();
+
+	while (t2 && t3)
+	{
+		if (t2->data.getPower() == t3->data.getPower())
+		{
+			if (t2->data.getCoef() - t3->data.getCoef())
+			{
+				Monom p = Monom(t2->data.getCoef() - t3->data.getCoef(), t2->data.getPower());
+				res.monoms.pushBack(p);
+				res.resize();
+				res.normalize();
+			}
+			t2 = t2->next;
+			t3 = t3->next;
+		}
+		else if (t2->data.getPower() < t3->data.getPower())
+		{
+			Monom p = Monom(t2->data.getCoef(), t2->data.getPower());
+			res.monoms.pushBack(p);
+			res.resize();
+			res.normalize();
+			t2 = t2->next;
+		}
+		else
+		{
+			Monom p = Monom(-t3->data.getCoef(), t3->data.getPower());
+			res.monoms.pushBack(p);
+			res.resize();
+			res.normalize();
+			t3 = t3->next;
+		}
+	}
+
+	while (t2)
+	{
+		Monom p = Monom(t2->data.getCoef(), t2->data.getPower());
+		res.monoms.pushBack(p);
+		res.resize();
+		res.normalize();
+		t2 = t2->next;
+	}
+
+	while (t3)
+	{
+		Monom p = Monom(-t3->data.getCoef(), t3->data.getPower());
+		res.monoms.pushBack(p);
+		res.resize();
+		res.normalize();
+		t3 = t3->next;
+	}
+	return res;
+}
+
+/*
 Polynom operator-(const Polynom & p1, const Polynom & p2)
 {
 	Polynom temp1(p1);
@@ -315,6 +440,7 @@ Polynom operator-(const Polynom & p1, const Polynom & p2)
 	}
 	return temp1;
 }
+*/
 
 Polynom operator*(const Polynom & p1, const Polynom & p2)
 {
@@ -335,4 +461,3 @@ Polynom operator*(const Polynom & p1, const Polynom & p2)
 	result.normalize();
 	return result;
 }
-

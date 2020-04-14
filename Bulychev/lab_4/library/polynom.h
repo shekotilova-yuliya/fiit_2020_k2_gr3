@@ -30,8 +30,8 @@ public:
 	void resize();
 	void parse(std::string str);
 	void normalize();
-	friend Polynom operator+(const Polynom& p1, const Polynom& p2);
-	friend Polynom operator-(const Polynom& p1, const Polynom& p2);
+	Polynom operator+(Polynom& p2);
+	Polynom operator-(Polynom& p2);
 	friend Polynom operator*(const Polynom& p1, const Polynom& p2);
 };
 

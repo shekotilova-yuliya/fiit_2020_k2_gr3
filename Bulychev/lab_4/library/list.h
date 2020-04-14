@@ -16,6 +16,7 @@ class List
 public:
 	List();
 	List(const List& l);
+	Node<T>* getheadptr() { return head; };
 	T getHead() { return head->data; };
 	bool isEmpty() { if (head == 0) return true; return false; };
 	Node<T>* getTail();
