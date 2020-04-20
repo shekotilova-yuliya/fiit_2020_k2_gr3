@@ -7,6 +7,7 @@ using namespace std;
 polinom::polinom() 
 {
     h = NULL;
+    tail = NULL;
 }
 
 void polinom::add(int powx, int powy, int powz, double a) 
@@ -35,6 +36,7 @@ void polinom::add(int powx, int powy, int powz, double a)
     if (p->next == NULL) 
     {
         p->next = t;
+        tail = t;
         return;
     }
     if (p->next < t)
@@ -47,6 +49,7 @@ void polinom::add(int powx, int powy, int powz, double a)
 
 void polinom::add(const link& x)
 {
+    
     link* t = new link(x);
     if (h == NULL) {
         h = new link(x);
@@ -80,9 +83,10 @@ void polinom::add(const link& x)
         delete t;
         return;
     }
-    if (p->next == NULL) 
+    if (p->next == NULL)
     {
         p->next = t;
+        tail = t;
         return;
     }
     if (p->next < t) 
@@ -92,6 +96,36 @@ void polinom::add(const link& x)
         return;
     }
 }
+
+void polinom::add_to_tail(const link& x)
+{
+    if (tail == NULL) 
+    {
+        h = tail = new link(x);
+        return;
+    }
+
+  
+
+
+    link* t = new link(x);
+    tail->next = t;
+    tail = t;
+}
+
+void polinom::add_to_tail(int pow, double a)
+{
+    if (tail == NULL)
+    {
+        h = tail = new link(pow, a);
+        return;
+    }
+    link* t = new link(pow, a);
+    tail->next = t;
+    tail = t;
+}
+
+
 
 ostream& operator<<(ostream& out, const polinom& t) 
 {
@@ -111,14 +145,33 @@ polinom operator+(const polinom& x, const polinom& y)
     link* i = x.h;
     link* j = y.h;
     polinom res;
-    while (i != NULL) 
+    while (i != NULL &&  j != NULL) 
     {
-        while (j != NULL && *j >= *i) res.add(*j), j = j->next;
-        res.add(*i);
-        i = i->next;
+
+        if (i->pow==j->pow)
+        {
+            if (i->a + j->a)
+            {
+                
+                res.add_to_tail(i->pow, i->a + j->a);
+            }
+
+            i = i->next;
+            j = j->next;
+        }
+        else if (i->pow < j->pow)
+        {
+            res.add_to_tail(i->pow, i->a);
+            i = i->next;
+        }
+        else
+        {
+            res.add_to_tail(j->pow, j->a);
+            j = j->next;
+        }
     }
-    while (i != NULL) res.add(*i), i = i->next;
-    while (j != NULL) res.add(*j), j = j->next;
+    while (i != NULL) res.add_to_tail(*i), i = i->next;
+    while (j != NULL) res.add_to_tail(*j), j = j->next;
     return res;
 }
 

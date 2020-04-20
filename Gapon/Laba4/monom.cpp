@@ -5,51 +5,47 @@ using namespace std;
 
 bool operator < (const link& x, const link& y)
 {
-    if (x.powx < y.powx) return true;
-    if (x.powx == y.powx) {
-        if (x.powy < y.powy) return true;
-        if (x.powy == y.powy) {
-            if (x.powz < y.powz) return true;
-        }
-    }
+    if (x.pow < y.pow) return true;
     return false;
 }
 
 bool operator >= (const link& x, const link& y) 
 {
-    if (x.powx < y.powx) return false;
-    if (x.powx == y.powx) {
-        if (x.powy < y.powy) return false;
-        if (x.powy == y.powy) {
-            if (x.powz < y.powz) return false;
-        }
-    }
-    return true;
+    if (x.pow >= y.pow) return true;
+    return false;
 }
 
 bool operator == (const link& x, const link& y)
 {
-    if (x.powx == y.powx && x.powy == y.powy && x.powz == y.powz) return true;
+    if (x.pow == y.pow) return true;
     return false;
 }
 
 link operator*(const link& x, const link& y) 
 {
     link res;
-    res.powx = x.powx + y.powx;
-    res.powy = x.powy + y.powy;
-    res.powz = x.powz + y.powz;
+    res.pow = x.pow + y.pow;
     res.a = x.a * y.a;
     return res;
 }
 
 ostream& operator<<(ostream& out, const link& t) 
-{
+{ 
+    int pow = t.pow;
+    int powx = pow % 20;
+    pow /= 20;
+    int powy = pow % 20;
+    pow /= 20;
+    int powz = pow % 20;
+    pow /= 20;
     out << "(" << t.a << " * ";
-    out << "x^" << t.powx << " * y^" << t.powy << " * z^" << t.powz << ")";
+    out << "x^" << powx << " * y^" << powy << " * z^" << powz << ")";
     return out;
 }
-istream& operator>>(istream& in, link& t) {
-    in >> t.a >> t.powx >> t.powy >> t.powz;
+istream& operator>>(istream& in, link& t) 
+{
+    int powx, powy, powz;
+    in >> t.a >> powx >> powy >> powz;
+    t.pow = powx + powy * 20 + powz * 400;
     return in;
 }

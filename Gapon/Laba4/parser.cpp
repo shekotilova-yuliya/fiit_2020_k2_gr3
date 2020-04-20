@@ -11,6 +11,7 @@ polinom calculate::parser(string s)
     int i = n - 1;
 
     link* t = new link();
+    int powx, powy, powz;
     while (i >= 0) {
         while (i >= 0 && (s[i] < '0' || s[i] > '9')) i--;
         while (i >= 0 && s[i] >= '0' && s[i] <= '9') 
@@ -39,15 +40,15 @@ polinom calculate::parser(string s)
         switch (s[i])
         {
         case 'x':
-            t->powx = k;
+            t->setx(k);
             k = 0;
             break;
         case 'y':
-            t->powy = k;
+            t->sety(k);
             k = 0;
             break;
         case 'z':
-            t->powz = k;
+            t->setz(k);
             k = 0;
             break;
         default:
