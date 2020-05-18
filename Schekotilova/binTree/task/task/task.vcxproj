@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BinTree.h" />
+    <ClInclude Include="treenode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BinTree.cpp" />
