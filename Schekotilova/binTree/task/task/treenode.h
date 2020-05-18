@@ -3,13 +3,13 @@
 
 using namespace std;
 
-class treeNode
+struct treeNode
 {
 	int key;
 	treeNode *left, *right, *parent;
 
 	treeNode();
-	treeNode(int key_);
+	treeNode(int key);
 	treeNode(const treeNode& node);
 	~treeNode() { left = nullptr; right = nullptr; }
 
@@ -33,14 +33,14 @@ treeNode::treeNode()
 	left = nullptr;
 	right = nullptr;
 	parent = nullptr;
-}
+};
 treeNode::treeNode(int key)
 {
 	this->key = key;
 	left = nullptr;
 	right = nullptr;
 	parent = nullptr;
-}
+};
 
 treeNode::treeNode(const treeNode& n)
 {
@@ -48,29 +48,29 @@ treeNode::treeNode(const treeNode& n)
 	left = n.left;
 	right = n.right;
 	parent = n.parent;
-}
+};
 
 treeNode* treeNode::getR() const
 {
 	return right;
-}
+};
 
 treeNode* treeNode::getPrnt() const
 {
 	return parent;
-}
+};
 
 void treeNode::setL(treeNode* left)
 {
 	this->left = left;
-}
+};
 
 void treeNode::setR(treeNode* right)
 {
 	this->right = right;
-}
+};
 
 void treeNode::setPrnt(treeNode* parent)
 {
 	this->parent = parent;
-}
+};
