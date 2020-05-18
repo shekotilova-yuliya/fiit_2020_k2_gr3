@@ -6,23 +6,24 @@ using namespace std;
 
 int main()
 {
-	int n;
-	Node tree(50);
+	int a;
+	Node nd(50);
+	BinTree tr(&nd)
 	srand(time(0));
 	int k;
 	cout << "enter a number of keys(from 1 to 50): " << endl;
 	cin >>k;
-	for (int i = 0; i < k; i++)
+	for (int i = 0; i < k - 1; i++) 
 	{
-		int number = rand() % 100;
-		Node node(number);
-		Node::insertNode(&tree, &node);
+		int tmp = rand() % 100;
+		Node nd(tmp);
+		BinTree::insertNode(tr.getRoot(), &nd);
 	}
-	cout << "tree keys:" << tree << endl;
+	cout << "tree keys:" << tr << endl;
 	cout << "which key is deleted ";
-	cin >> n;
-	tree.removeNode(Node::searchNode(&tree, n));
-	cout << "keys after deleting" << tree << endl;
+	cin >> a;
+	tr.deleteNode(Node::searchNode(tr.getRoot(), a));
+	cout << "keys after deleting: " << tr << endl;
 	system("pause");
 	return 0;
 }
