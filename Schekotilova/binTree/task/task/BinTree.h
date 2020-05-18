@@ -1,27 +1,27 @@
 #pragma once
 #include <iostream>
+#include"treenode.h"
 #include <time.h>
 
 using namespace std;
 
-struct Node
+class BinTree
 {
-	int key;
-	Node* left, *right, *parent;
+public:
+	Node* root;
 
 	Node();
-	Node(int); 
-	~Node() {left = nullptr;right = nullptr;}
-
+	Node(int);
+	~Node() { left = nullptr; right = nullptr; }
+	static Node* search(Node*, int);
 	Node* searchMin(Node*);
-	Node* searchNext(Node*);
-	static Node* searchNode(Node*, int);
+	Node* searchNxt(Node*);	
 	static void insertNode(Node*, Node*);
-	void removeNode(Node*);
+	void deleteNode(Node*);
 	static void print(const Node*);
-	friend ostream& operator<<(ostream& out, const Node& root)
+	friend ostream& operator<<(ostream& out, const BinTree& btree)
 	{
-		if (&root != nullptr) Node::print(&root);
-		return out;
+		if (btree.root != nullptr) BinTree::print(btree.root);
+			return out;
 	}
 };
