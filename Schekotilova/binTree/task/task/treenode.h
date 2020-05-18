@@ -3,7 +3,6 @@
 
 using namespace std;
 
-template <class TData>
 class treeNode
 {
 	int key;
@@ -29,16 +28,13 @@ class treeNode
 	}
 };
 
-template <class TData>
-treeNode<TData>::treeNode()
+treeNode::treeNode()
 {
 	left = nullptr;
 	right = nullptr;
 	parent = nullptr;
 }
-
-template <class TData>
-treeNode<TData>::treeNode(int key)
+treeNode::treeNode(int key)
 {
 	this->key = key;
 	left = nullptr;
@@ -46,8 +42,7 @@ treeNode<TData>::treeNode(int key)
 	parent = nullptr;
 }
 
-template <class TData>
-treeNode<TData>::treeNode(const treeNode& n)
+treeNode::treeNode(const treeNode& n)
 {
 	key = n.key;
 	left = n.left;
@@ -55,32 +50,27 @@ treeNode<TData>::treeNode(const treeNode& n)
 	parent = n.parent;
 }
 
-template <class TData>
-treeNode<TData>* treeNode<TData>::getR() const
+treeNode* treeNode::getR() const
 {
 	return right;
 }
 
-template <class TData>
-treeNode<TData>* treeNode<TData>::getPrnt() const
+treeNode* treeNode::getPrnt() const
 {
 	return parent;
 }
 
-template <class TData>
-void treeNode<TData>::setL(treeNode* left)
+void treeNode::setL(treeNode* left)
 {
 	this->left = left;
 }
 
-template <class TData>
-void treeNode<TData>::setR(treeNode* right)
+void treeNode::setR(treeNode* right)
 {
 	this->right = right;
 }
 
-template <class TData>
-void treeNode<TData>::setPrnt(treeNode* parent)
+void treeNode::setPrnt(treeNode* parent)
 {
 	this->parent = parent;
 }
