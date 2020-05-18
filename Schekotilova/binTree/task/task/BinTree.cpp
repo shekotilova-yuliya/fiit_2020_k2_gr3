@@ -1,37 +1,23 @@
 #include "BinTree.h"
 
-Node::Node()
-{
-	left = nullptr;
-	right = nullptr;
-	parent = nullptr;
-}
-
-Node::Node(int key)
-{
-	this->key = key;
-	left = right = parent = nullptr;
-}
-
-
-Node* Node::searchMin(Node* root)
+Node* BinaryTree::searchMin(Node* root)
 {
 	Node* curr = root;
 	while (curr->left != nullptr) curr = curr->left;
 	return curr;
 }
 
-Node* Node::searchNext(Node* curr)
+Node* BinaryTree::searchNxt(Node* curr)
 {
-	Node* res = NULL;
-	if (curr->right != NULL)
+	Node* res = nullptr;
+	if (curr->right != nullptr)
 	{
 		res = searchMin(curr);
 		return res;
 	}
 	res = curr->parent;
 	Node* tmp = curr;
-	while (res != NULL && tmp == res->right)
+	while (res != nullptr && tmp == res->right)
 	{
 		tmp = res;
 		res = res->parent;
@@ -39,15 +25,14 @@ Node* Node::searchNext(Node* curr)
 	return res;
 }
 
-Node* Node::searchNode(Node* root, int k)
+Node* BinaryTree::searchNode(Node* root, int k)
 {
 	if (root == nullptr) return 0;
 	if (root->key == k) return root;
 	if (k < root->key) return searchNode(root->left, k);
 	else return searchNode(root->right, k);
-}
 
-void Node::insertNode(Node* root, Node* node)
+void BinTree::insertNode(Node* root, Node* node)
 {
 	if (root == nullptr)
 	{
@@ -81,7 +66,7 @@ void Node::insertNode(Node* root, Node* node)
 	}
 }
 
-void Node::removeNode(Node* a)
+void BinTree::deleteNode(Node* a)
 {
 	if (a->left == nullptr && a->right == nullptr)
 	{
@@ -113,11 +98,11 @@ void Node::removeNode(Node* a)
 		Node* y = nullptr;
 		y = searchNext(a);
 		a->key = y->key;
-		removeNode(y); 
+		deleteNode(y); 
 	}
 }
 
-void Node::print(const Node* root)
+void BinTree::print(const Node* root)
 {
 	if (root != nullptr)
 	{
