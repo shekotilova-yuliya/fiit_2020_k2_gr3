@@ -1,38 +1,45 @@
 #include "BinTree.h"
 
-Node* BinaryTree::searchMin(Node* root)
+
+treeNode* BinTree::searchMin(treeNode* root)
 {
-	Node* curr = root;
+	treeNode* curr = root;
 	while (curr->left != nullptr) curr = curr->left;
 	return curr;
 }
 
-Node* BinaryTree::searchNxt(Node* curr)
+treeNode* BinTree::searchNext(treeNode* curr)
 {
-	Node* res = nullptr;
-	if (curr->right != nullptr)
+	treeNode* r = NULL;
+	if (curr->right != NULL)
 	{
-		res = searchMin(curr);
-		return res;
+		r = searchMin(curr);
+		return r;
 	}
-	res = curr->parent;
-	Node* tmp = curr;
-	while (res != nullptr && tmp == res->right)
+	r = curr->parent;
+	treeNode* tmp = curr;
+	while (res != NULL && tmp == r->right)
 	{
-		tmp = res;
-		res = res->parent;
+		tmp = r;
+		r = r->parent;
 	}
-	return res;
+	return r;
 }
 
-Node* BinaryTree::searchNode(Node* root, int k)
+treeNode* BinTree::search(treeNode* root, int k)
 {
 	if (root == nullptr) return 0;
 	if (root->key == k) return root;
 	if (k < root->key) return searchNode(root->left, k);
 	else return searchNode(root->right, k);
+}
 
-void BinTree::insertNode(Node* root, Node* node)
+treeNode* BinTree::getRoot() const
+{
+	return root;
+}
+
+void BinTree::insertNode(treeNode* root, treeNode* node)
 {
 	if (root == nullptr)
 	{
@@ -40,8 +47,8 @@ void BinTree::insertNode(Node* root, Node* node)
 		root->left = root->right = root->parent = nullptr;
 		return;
 	}
-	Node* x = root;
-	Node* y = x;
+	treeNode* x = root;
+	treeNode* y = x;
 	while (x != nullptr)
 	{
 		y = x;
@@ -50,7 +57,7 @@ void BinTree::insertNode(Node* root, Node* node)
 	}
 	if (node->key < y->key)
 	{
-		y->left = new Node();
+		y->left = new treeNode();
 		y->left->key = node->key;
 		y->left->parent = y;
 		y->left->left = nullptr;
@@ -58,7 +65,7 @@ void BinTree::insertNode(Node* root, Node* node)
 	}
 	else
 	{
-		y->right = new Node();
+		y->right = new treeNode();
 		y->right->key = node->key;
 		y->right->parent = y;
 		y->right->left = nullptr;
@@ -66,9 +73,9 @@ void BinTree::insertNode(Node* root, Node* node)
 	}
 }
 
-void BinTree::deleteNode(Node* a)
+void BinTree::deleteNode(treeNode* a)
 {
-	if (a->left == nullptr && a->right == nullptr)
+	if ( a->right == nullptr && a->left == nullptr)
 	{
 		if (a->parent != nullptr)
 		{
@@ -95,19 +102,19 @@ void BinTree::deleteNode(Node* a)
 	}
 	else
 	{
-		Node* y = nullptr;
+		treeNode* y = nullptr;
 		y = searchNext(a);
 		a->key = y->key;
-		deleteNode(y); 
+		removeNode(y); 
 	}
 }
 
-void BinTree::print(const Node* root)
+void BinTree::print(const treeNode* root)
 {
 	if (root != nullptr)
 	{
 		print(root->left);
-		cout << " " << root->key << "	";
+		cout << *root << endl;
 		print(root->right);
 	}
 }
