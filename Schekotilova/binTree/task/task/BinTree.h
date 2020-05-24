@@ -11,13 +11,13 @@ public:
 	treeNode* getRoot() const;
 	static treeNode* search(treeNode*, int);
 	treeNode* searchMin(treeNode*);
-	treeNode* searchNxt(treeNode*);	
+	treeNode* searchNxt(treeNode*);
 	static void insertNode(treeNode*, treeNode*);
 	void deleteNode(treeNode*);
 	static void print(const treeNode*);
 	friend ostream& operator<<(ostream& out, const BinTree& btree)
 	{
 		if (btree.root != nullptr) BinTree::print(btree.root);
-			return out;
+		return out;
 	}
 };
