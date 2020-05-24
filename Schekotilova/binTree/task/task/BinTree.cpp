@@ -75,7 +75,7 @@ void BinTree::insertNode(treeNode* root, treeNode* node)
 
 void BinTree::deleteNode(treeNode* a)
 {
-	if ( a->right == nullptr && a->left == nullptr)
+	if (a->right == nullptr && a->left == nullptr)
 	{
 		if (a->parent != nullptr)
 		{
@@ -84,7 +84,7 @@ void BinTree::deleteNode(treeNode* a)
 		}
 		else a = nullptr;
 	}
-	else if (a->left == nullptr && a->right != nullptr ||a->left != nullptr && a->right == nullptr)
+	else if (a->left == nullptr && a->right != nullptr || a->left != nullptr && a->right == nullptr)
 	{
 		if (a->left == nullptr)
 		{
@@ -105,7 +105,7 @@ void BinTree::deleteNode(treeNode* a)
 		treeNode* y = nullptr;
 		y = searchNext(a);
 		a->key = y->key;
-		removeNode(y); 
+		removeNode(y);
 	}
 }
 
